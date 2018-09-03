@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quelle heure il est Paris</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+分别获取到当前时间的时、分、秒。
+通过时分秒对一圈360度，进行映射，确定每一个指针所需旋转的角度。
+通过CSS的transform：rotate(deg)，来实时的调整指针在键盘中的位置。 
+-->
+<div class="time-box">
+  <h3>Paris</h3>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+</div>
+<div class="time-box">
+  <h3>Taipei</h3>
+  <div class="clock-tp">
+    <div class="clock-face">
+      <div class="hand hour-hand-tp"></div>
+      <div class="hand min-hand-tp"></div>
+      <div class="hand second-hand-tp"></div>
+    </div>
+  </div>
+</div>
+<!-- paris + 6h = taipei / 21600000 毫秒 / 6h  -->
+
+<script>
+  // 获取秒针、分钟、小时节点
+  const secondHand = document.querySelector('.second-hand');
+  const minsHand = document.querySelector('.min-hand');
+  const hourHand = document.querySelector('.hour-hand');
+  // Taipei
+  const secondHandTp = document.querySelector('.second-hand-tp');
+  const minsHandTp = document.querySelector('.min-hand-tp');
+  const hourHandTp = document.querySelector('.hour-hand-tp');
+
+
+  // 获取当前时间秒、分、小时
+  function setDate(){
+    const date = new Date();
+    // 秒
+    const seconds = date.getSeconds(); //获取当前时间秒
+    const secondsDegrees = (90 + (seconds / 60) * 360); // 计算秒角度
+
+    // 分
+    const mins = date.getMinutes(); //获取当前时间分钟
+    const minsDegrees = (90 + (mins / 60) * 360); // 计算分钟角度
+
+    // 时
+    const hour = date.getHours(); //获取当前时间小时
+    const hourDegrees = (90 + (hour / 12) * 360) + ((mins / 12 / 60) * 360); // 计算小时角度
+
+    //解决指针跳顿问题: 在发生跳顿的角度值处，将 CSS 的 `transition` 属性去掉
+    if (secondsDegrees === 90) {
+      secondHand.style.transform = 'all 0s';
+    } else {
+      secondHand.style.transform = 'all 0.05s';
+    }
+
+    if (minsDegrees === 90) {
+      minsHand.style.transform = 'all 0s';
+    } else {
+      minsHand.style.transform = 'all 0.1s';
+    }
+
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`; // 根据角度设置样式
+    minsHand.style.transform = `rotate(${minsDegrees}deg)`; 
+    hourHand.style.transform = `rotate(${hourDegrees}deg)`; 
+  }
+  setInterval(setDate, 1000); // 设置定时器，每秒调用一次setDate函数
+  setDate();
+
+  /* -------- Taipei -------- */
+  // 获取Taipei当前时间秒、分、小时
+  function setDateTp() {
+    const dateTp = new Date();
+    // 秒
+    const seconds = dateTp.getSeconds(); //获取当前时间秒
+    const secondsDegrees = (90 + (seconds / 60) * 360); // 计算秒角度
+
+    // 分
+    const mins = dateTp.getMinutes(); //获取当前时间分钟
+    const minsDegrees = (90 + (mins / 60) * 360); // 计算分钟角度
+
+    // 时
+    const hour = dateTp.getHours() - 6; //获取当前Taipei时间小时 +6h / 1000 * 60 * 60 * 6
+    const hourDegrees = (90 + (hour / 12) * 360) + ((mins / 12 / 60) * 360); // 计算小时角度
+
+    //解决指针跳顿问题: 在发生跳顿的角度值处，将 CSS 的 `transition` 属性去掉
+    if (secondsDegrees === 90) {
+      secondHandTp.style.transform = 'all 0s';
+    } else {
+      secondHandTp.style.transform = 'all 0.05s';
+    }
+
+    if (minsDegrees === 90) {
+      minsHandTp.style.transform = 'all 0s';
+    } else {
+      minsHandTp.style.transform = 'all 0.1s';
+    }
+
+    secondHandTp.style.transform = `rotate(${secondsDegrees}deg)`; // 根据角度设置样式
+    minsHandTp.style.transform = `rotate(${minsDegrees}deg)`;
+    hourHandTp.style.transform = `rotate(${hourDegrees}deg)`;
+  }
+  setInterval(setDateTp, 1000); // 设置定时器，每秒调用一次setDateTp函数
+  setDateTp();
+
+</script>
+
+</body>
+</html>

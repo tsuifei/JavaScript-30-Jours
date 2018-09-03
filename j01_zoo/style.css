@@ -1,0 +1,66 @@
+html {
+    font-style: 10px;
+    background: url('img/mouton.jpg') center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body,
+html {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: rgb(21, 168, 40);
+    text-shadow: 0 0 .5rem rgb(18, 56, 2);
+}
+
+.keys {
+    margin: 0 auto;
+    padding: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    /* flex: 3; */
+    min-height: 40vh;
+    max-width: 50vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.key {
+    border: .2rem solid rgb(11, 89, 37);
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 100px;
+    text-align: center;
+    color: rgb(21, 168, 40);
+    background: rgba(255, 254, 254, 0.6);
+    text-shadow: 0 0 .5rem rgb(15, 15, 1);
+}
+
+.playing {
+    transform: scale(1.1);
+    border-color: rgb(21, 168, 40);
+    box-shadow: 0 0 1rem rgb(21, 168, 40);
+}
+
+kbd {
+    display: block;
+    font-size: 4rem;
+}
+
+.sound {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    color: rgb(21, 168, 40);
+}

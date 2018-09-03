@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>J05_flex image</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="panels">
+        <div class="panel panel1">
+            <p>Demain</p>
+            <p>hiver</p>
+            <p>destin</p>
+        </div> 
+        <div class="panel panel2">
+            <p>Espérance</p>
+            <p>pourquoi</p>
+            <p>pas</p>
+        </div> 
+        <div class="panel panel3">
+            <p>Aujourd'hui</p>
+            <p>ciel</p>
+            <p>histoire</p>
+        </div>
+    <div class="panel panel4">
+            <p>Maudit</p>
+            <p>lieu</p>
+            <p>esprits</p>
+        </div> 
+        <div class="panel panel5">
+            <p>troll</p>
+            <p>fois</p>
+            <p>royaume</p>
+        </div> 
+        <div class="panel panel6">
+            <p>Galère</p>
+            <p>engager</p>
+            <p>aventure </p>
+        </div>
+    <div class="panel panel7">
+            <p>Loterie</p>
+            <p>Vie</p>
+            <p>Chagrin</p>
+        </div>
+    </div>
+    
+<script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+        // console.log("hihi");
+        this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+        console.log(e.propertyName);
+        if (e.propertyName.includes('flex')) {
+            this.classList.toggle('open-active');
+        }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+
+</script>
+</body>
+</html>

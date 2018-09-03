@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>j03_variable</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Update CSS Variables with <span class="hl">JS</span></h2>
+    
+    <div class="controls">
+        <label for="spacing">Spacing : <input type="range" id="spacing" name="spacing" min="10" max="200" value="10" data-sizing="px"></label>
+        <label for="blur">Blur : <input type="range" id="blur" name="blur" min="0" max="25" value="10" data-sizing="px"></label>
+        <label for="base">Base Color : <input type="color" id="base" name="base" value="#00FF00"></label>
+    </div>
+    <img class="img-demo" src="../img/mouton.jpg">
+    <div class="result">
+        <div class="showText">{spacing:<label id="label_spacing">10px</label>}</div>
+        <div class="showText">{blur:<label id="label_blur">0px</label>}</div>
+        <div class="showText">{base:<label id="label_base">#00FF00</label>}</div>
+    </div>
+   
+
+    <script>
+
+        const inputs = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || ''; //根據data-sizing獲取參數的後綴
+            // document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix); //設置頁面CSS變量的值
+            document.getElementById(`label_${this.name}`).innerText = this.value + suffix; //頁面參數實時顯示
+        }
+
+        inputs.forEach(input => input.addEventListener('change', handleUpdate));
+        
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));//在滑塊拖動過程中也實時變化
+    
+    </script>
+    
+</body>
+</html>
